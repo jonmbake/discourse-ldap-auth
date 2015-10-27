@@ -1,10 +1,10 @@
 # discourse-ldap-auth
 
-A [Discourse](https://github.com/discourse/discourse) plugin to enable LDAP/ActiveDirectory authentication.  Basically just wraps the [omniauth-ldap](https://github.com/intridea/omniauth-ldap) gem within a Discourse plugin.
+A [Discourse](https://github.com/discourse/discourse) plugin to enable LDAP/ActiveDirectory authentication.  Basically just wraps the really great [omniauth-ldap](https://github.com/intridea/omniauth-ldap) gem within a Discourse plugin.
 
 ## Setup
 
-I'll defer to this great guide on installing Discourse plugins, written by the Discourse folks themselves: [Install a Plugin](https://meta.discourse.org/t/install-a-plugin/19157).
+I'll defer to this Discourse thread on steps to install a Discourse plugin: [Install a Plugin](https://meta.discourse.org/t/install-a-plugin/19157).  In a nutshell, you just have to edit `app.yml` and add `https://github.com/jonmbake/discourse-ldap-auth ldap` under `hooks > after_code > exec > cmd`.
 
 After the plugin is installed, logging in as an Admin and navigating to `admin/site_settings/category/plugins` will enable you to specify your LDAP settings:
 
