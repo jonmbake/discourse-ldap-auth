@@ -1,0 +1,10 @@
+en:
+  site_settings:
+    ldap_enabled: "Is LDAP plugin enabled?"
+    ldap_hostname: "Hostname of LDAP server"
+    ldap_port: "Connection port to LDAP server"
+    ldap_method: "Connection method: ssl, tls or plain"
+    ldap_base: "LDAP base"
+    ldap_uid: "LDAP uid"
+    ldap_bind_db: "LDAP bind db (needed if LDAP server does not allow anonymous binding)"
+    ldap_password:  "LDAP bind password (needed if LDAP server does not allow anonymous binding)"

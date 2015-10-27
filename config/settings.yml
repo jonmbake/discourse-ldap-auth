@@ -1,0 +1,25 @@
+plugins:
+  ldap_enabled:
+    default: true
+    client: true
+  ldap_hostname:
+    client: true
+    default: 'adfs.example.com'
+  ldap_port:
+    client: true
+    default: 389
+  ldap_method:
+    client: true
+    default: 'plain'
+  ldap_base:
+    client: true
+    default: 'dc=example,dc=com'
+  ldap_uid:
+    client: true
+    default: 'sAMAccountName'
+  ldap_bind_db:
+    client: false
+    default: ''
+  ldap_password:
+    client: false
+    default: ''
