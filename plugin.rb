@@ -4,6 +4,10 @@
 # authors: Jon Bake <jonmbake@gmail.com>
 
 enabled_site_setting :ldap_enabled
+
+gem 'pyu-ruby-sasl', '0.0.3.3', require: false
+gem 'rubyntlm', '0.1.1', require: false
+gem 'net-ldap', '0.3.1'
 gem 'omniauth-ldap', '1.0.4'
 
 class LDAPAuthenticator < ::Auth::Authenticator
@@ -25,22 +29,17 @@ class LDAPAuthenticator < ::Auth::Authenticator
   def register_middleware(omniauth)
     omniauth.provider :ldap,
       setup:  -> (env) {
-        strategy_opts = env["omniauth.strategy"].options
-        strategy_opts[:host] = SiteSetting.ldap_hostname
-        strategy_opts[:port] = SiteSetting.ldap_port
-        strategy_opts[:method] = SiteSetting.ldap_method
-        strategy_opts[:base] = SiteSetting.ldap_base
-        strategy_opts[:uid] = SiteSetting.ldap_uid
-        strategy_opts[:name_proc] = Proc.new {|name| name.gsub(/@.*$/,'')}
-        strategy_opts[:bind_dn] = SiteSetting.ldap_bind_db
-        strategy_opts[:password] = SiteSetting.ldap_password
+        env["omniauth.strategy"].options.merge!(
+          host: SiteSetting.ldap_hostname,
+          port: SiteSetting.ldap_port,
+          method: SiteSetting.ldap_method,
+          base: SiteSetting.ldap_base,
+          uid: SiteSetting.ldap_uid,
+          bind_dn: SiteSetting.ldap_bind_db,
+          password: SiteSetting.ldap_password
+        )
       }
   end
-end
-
-class LDAPStrategy < OmniAuth::Strategies::LDAP
-  option :name, 'ldap'
-  option :name_proc, lambda {|n| n.split('@')[0] }
 end
 
 auth_provider title: 'Login with LDAP',
