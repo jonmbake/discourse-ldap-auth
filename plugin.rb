@@ -18,8 +18,9 @@ class LDAPAuthenticator < ::Auth::Authenticator
   def after_authenticate(auth_options)
     info = auth_options.info
     result = Auth::Result.new
-    email = result.email = info[:email]
     result.name = info[:name]
+    result.username = info[:nickname]
+    email = result.email = info[:email]
     result.user = User.find_by_email(email)
     result.omit_username = true
     result.email_valid = true
