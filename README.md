@@ -1,18 +1,28 @@
 # discourse-ldap-auth
 
-A [Discourse](https://github.com/discourse/discourse) plugin to enable LDAP/ActiveDirectory authentication.  Basically just wraps the really great [omniauth-ldap](https://github.com/intridea/omniauth-ldap) gem within a Discourse plugin.
+A [Discourse](https://github.com/discourse/discourse) plugin to enable LDAP/ActiveDirectory authentication.
 
 ## Setup
 
-I'll defer to this Discourse thread on steps to install a Discourse plugin: [Install a Plugin](https://meta.discourse.org/t/install-a-plugin/19157).  In a nutshell, you just have to edit `app.yml` and add `https://github.com/jonmbake/discourse-ldap-auth ldap` under `hooks > after_code > exec > cmd`.
+Checkout: [Install a Plugin](https://meta.discourse.org/t/install-a-plugin/19157).
 
-After the plugin is installed, logging in as an Admin and navigating to `admin/site_settings/category/plugins` will enable you to specify your LDAP settings:
+## Configuration
 
-![Settings Page](https://github.com/jonmbake/screenshots/blob/master/discourse-ldap-auth/settings.png)
+After the plugin is installed, logging in as an Admin and navigating to `admin/site_settings/category/plugins` will enable you to specify your LDAP settings.  Most of the configuration options are documented in [omniauth-ldap](https://github.com/intridea/omniauth-ldap).
 
-Once the settings are set (you may need to clear *DISCOURSE_APP/tmp* and restart server), you should have an option to login in with LDAP:
+## A Note on User Account Creation
 
-![Login Popup](https://raw.githubusercontent.com/jonmbake/screenshots/master/discourse-ldap-auth/login.png)
+By default user accounts are automatically created (if they don't already exist) after authentication using **name**, **nickname** and **email** attributes of the LDAP entry.  If you do not want this behavior, you can change the **ldap_user_create_mode* configuration to one of the following:
 
+  Name | Description
+-------| --------------
+auto   | Automatically create a Discourse Account after authenticating through LDAP if account does not exist (default).
+list   | Provide a list of users in *ldap_users.yml*.  Only creates an account and/or passes authentication if user with email is in list. See example [ldap_user.yml](ldap_users.yml).
+none   | Fail auth if the user account does not already exist.
 
+*list* is also allows the specifying of *User Groups*, which will be automatically assigned to the user on creation.  It also allows specifying a different *username* and *name* from the LDAP entry.
 
+## Version History
+
+[0.2.0](https://github.com/jonmbake/discourse-ldap-auth) - Added ldap_user_create_mode configuration option.
+[0.1.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.1.0) - Init

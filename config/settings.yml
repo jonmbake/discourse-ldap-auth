@@ -2,6 +2,9 @@ plugins:
   ldap_enabled:
     default: true
     client: true
+  ldap_user_create_mode:
+    client: true
+    default: 'auto'
   ldap_hostname:
     client: true
     default: 'adfs.example.com'
