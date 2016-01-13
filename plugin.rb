@@ -11,7 +11,7 @@ gem 'net-ldap', '0.3.1'
 gem 'omniauth-ldap', '1.0.4'
 
 require 'yaml'
-require './lib/ldap_user'
+require_relative 'lib/ldap_user'
 
 class LDAPAuthenticator < ::Auth::Authenticator
   def name
@@ -47,10 +47,11 @@ class LDAPAuthenticator < ::Auth::Authenticator
         user_descriptions = load_user_descriptions
         return fail_auth('List of users must be provided when ldap_user_create_mode setting is set to \'list\'.') if user_descriptions.nil?
         #match on email
-        ud = user_descriptions.find { |ud| ud[:email] == auth_info[:email] }
-        return fail_auth('User with email is not listed in LDAP user list.') if ud.nil?
-        ud[:nickname] = ud[:username]
-        return LDAPUser.new(ud).auth_result
+        match = user_descriptions.find { |ud|  auth_info[:email].casecmp(ud[:email]) == 0 }
+        return fail_auth('User with email is not listed in LDAP user list.') if match.nil?
+        match[:nickname] = match[:username] || auth_info[:nickname]
+        match[:name] = match[:name] || auth_info[:name]
+        return LDAPUser.new(match).auth_result
       when 'auto'
         return LDAPUser.new(auth_info).auth_result
       else

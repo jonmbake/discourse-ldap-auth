@@ -6,7 +6,7 @@ class LDAPUser
     @email = auth_info[:email]
     @username = auth_info[:nickname]
     @user = User.find_by_email(@email)
-    create_user_groups(auth_info) unless self.account_exists?
+    create_user_groups(auth_info[:groups]) unless self.account_exists?
   end
 
   def auth_result
@@ -25,11 +25,10 @@ class LDAPUser
   end
 
   private
-  def create_user_groups(auth_info)
-    user_groups = auth_info[:groups]
+  def create_user_groups(user_groups)
     return if user_groups.nil?
     #user account must exist in order to create user groups
-    @user = User.create!(auth_info.reject { |k, v| k == :groups })
+    @user = User.create!(name: self.name, email: self.email, username: self.username)
     @user.activate
     user_groups.each do |group_name|
       group = Group.find_by(name: group_name)
