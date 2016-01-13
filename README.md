@@ -28,7 +28,7 @@ none   | Fail auth if the user account does not already exist.  This is a good o
 
 ## Other Tips
 
-When disabling Local Login and other authentication services, clicking the `Login` button or `Sign Up` will directly bring up LDAP Login popup.
+When disabling Local Login and other authentication services, clicking the `Login` or `Sign Up` button will directly bring up the LDAP Login popup.
 
 ![Disable Local](https://github.com/jonmbake/screenshots/blob/master/discourse-ldap-auth/disable_local.png)
 
