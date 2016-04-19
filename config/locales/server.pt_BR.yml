@@ -7,5 +7,5 @@ pt_BR:
     ldap_method: "Método da conexão:: ssl, tls ou plain"
     ldap_base: "LDAP base"
     ldap_uid: "LDAP uid"
-    ldap_bind_db: "Usuário LDAP bind (necessário se o servidor LDAP não permite binding anônimo)"
+    ldap_bind_dn: "Usuário LDAP bind (necessário se o servidor LDAP não permite binding anônimo)"
     ldap_password:  "Senha LDAP bind (necessário se o servidor LDAP não permite binding anônimo)"
