@@ -1,4 +1,4 @@
-en:
+es:
   site_settings:
     ldap_enabled: "Está activado el plugin de LDAP?"
     ldap_user_create_mode: "Modo de creación de usuario: auto, list o none"
