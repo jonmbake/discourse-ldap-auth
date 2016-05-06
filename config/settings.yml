@@ -28,4 +28,4 @@ plugins:
     default: ''
   ldap_filter:
     client: false
-    default: '(&(sAMAccountName=%{username})(memberof=CN=group-example,DC=example,DC=com))'
+    default: ''

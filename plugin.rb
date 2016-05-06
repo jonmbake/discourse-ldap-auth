@@ -33,7 +33,7 @@ class LDAPAuthenticator < ::Auth::Authenticator
           uid: SiteSetting.ldap_uid,
           bind_dn: SiteSetting.ldap_bind_db,
           password: SiteSetting.ldap_password,
-          filter: SiteSetting.ldap_filter,
+          filter: SiteSetting.ldap_filter
         )
       }
   end
