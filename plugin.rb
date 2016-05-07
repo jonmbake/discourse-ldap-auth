@@ -8,7 +8,7 @@ enabled_site_setting :ldap_enabled
 gem 'pyu-ruby-sasl', '0.0.3.3', require: false
 gem 'rubyntlm', '0.1.1', require: false
 gem 'net-ldap', '0.3.1'
-gem 'omniauth-ldap', '1.0.4'
+gem 'omniauth-ldap', '1.0.5'
 
 require 'yaml'
 require_relative 'lib/ldap_user'
@@ -32,7 +32,8 @@ class LDAPAuthenticator < ::Auth::Authenticator
           base: SiteSetting.ldap_base,
           uid: SiteSetting.ldap_uid,
           bind_dn: SiteSetting.ldap_bind_db,
-          password: SiteSetting.ldap_password
+          password: SiteSetting.ldap_password,
+          filter: SiteSetting.ldap_filter
         )
       }
   end

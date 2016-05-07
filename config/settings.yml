@@ -26,3 +26,6 @@ plugins:
   ldap_password:
     client: false
     default: ''
+  ldap_filter:
+    client: false
+    default: ''
