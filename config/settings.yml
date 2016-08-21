@@ -20,7 +20,7 @@ plugins:
   ldap_uid:
     client: true
     default: 'sAMAccountName'
-  ldap_bind_db:
+  ldap_bind_dn:
     client: false
     default: ''
   ldap_password:

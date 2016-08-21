@@ -7,6 +7,6 @@ en:
     ldap_method: "Connection method: ssl, tls or plain"
     ldap_base: "LDAP base"
     ldap_uid: "LDAP uid"
-    ldap_bind_db: "LDAP bind db (needed if LDAP server does not allow anonymous binding)"
+    ldap_bind_dn: "LDAP bind dn (needed if LDAP server does not allow anonymous binding)"
     ldap_password:  "LDAP bind password (needed if LDAP server does not allow anonymous binding)"
     ldap_filter:  "LDAP filter (for group based authentication)"
