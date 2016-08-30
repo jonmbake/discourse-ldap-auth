@@ -1,3 +1,5 @@
+**Note on Updating to Version 0.3** A typo was fixed in the name of a configuration. `ldap_bind_db` was renamed to `ldap_bind_dn`. If you update from <0.2 to 0.3, you will have to reset the `ldap_bind_dn` configuration value.
+
 # discourse-ldap-auth
 
 A [Discourse](https://github.com/discourse/discourse) plugin to enable LDAP/ActiveDirectory authentication.
@@ -36,6 +38,8 @@ When disabling Local Login and other authentication services, clicking the `Logi
 
 ## Version History
 
-[0.2.0](https://github.com/jonmbake/discourse-ldap-auth) - Added ldap_user_create_mode configuration option.
+[0.3.0](https://github.com/jonmbake/discourse-ldap-auth)- Fixed typo to `ldap_bind_db` configuration name
+
+[0.2.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.2.0) - Added ldap_user_create_mode configuration option.
 
 [0.1.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.1.0) - Init
