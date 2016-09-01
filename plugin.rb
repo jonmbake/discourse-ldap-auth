@@ -32,7 +32,7 @@ class LDAPAuthenticator < ::Auth::Authenticator
           base: SiteSetting.ldap_base,
           uid: SiteSetting.ldap_uid,
           # In 0.3.0, we fixed a typo in the ldap_bind_dn config name. This fallback will be removed in a future version.
-          bind_dn: SiteSetting.try(:ldap_bind_dn).presence || SiteSetting.ldap_bind_db,
+          bind_dn: SiteSetting.ldap_bind_dn.presence || SiteSetting.try(:ldap_bind_db),
           password: SiteSetting.ldap_password,
           filter: SiteSetting.ldap_filter
         )
