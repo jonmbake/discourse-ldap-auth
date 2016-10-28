@@ -1,31 +1,21 @@
 plugins:
   ldap_enabled:
     default: true
-    client: true
   ldap_user_create_mode:
-    client: true
     default: 'auto'
   ldap_hostname:
-    client: true
     default: 'adfs.example.com'
   ldap_port:
-    client: true
     default: 389
   ldap_method:
-    client: true
     default: 'plain'
   ldap_base:
-    client: true
     default: 'dc=example,dc=com'
   ldap_uid:
-    client: true
     default: 'sAMAccountName'
   ldap_bind_dn:
-    client: false
     default: ''
   ldap_password:
-    client: false
     default: ''
   ldap_filter:
-    client: false
     default: ''
