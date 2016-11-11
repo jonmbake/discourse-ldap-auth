@@ -38,7 +38,9 @@ When disabling Local Login and other authentication services, clicking the `Logi
 
 ## Version History
 
-[0.3.0](https://github.com/jonmbake/discourse-ldap-auth)- Fixed typo to `ldap_bind_db` configuration name
+[0.3.5](https://github.com/jonmbake/discourse-ldap-auth)- Updated styling of LDAP login popup
+
+[0.3.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.0)- Fixed typo to `ldap_bind_db` configuration name
 
 [0.2.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.2.0) - Added ldap_user_create_mode configuration option.
 
