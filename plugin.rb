@@ -23,7 +23,7 @@ class LDAPAuthenticator < ::Auth::Authenticator
   end
 
   def register_middleware(omniauth)
-    omniauth.configure{ |s| s.form_css = File.read(File.expand_path("../css/form.css", __FILE__)) }
+    omniauth.configure{ |c| c.form_css = File.read(File.expand_path("../css/form.css", __FILE__)) }
     omniauth.provider :ldap,
       setup:  -> (env) {
         env["omniauth.strategy"].options.merge!(
