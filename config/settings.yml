@@ -17,5 +17,6 @@ plugins:
     default: ''
   ldap_password:
     default: ''
+    type: 'password'
   ldap_filter:
     default: ''
