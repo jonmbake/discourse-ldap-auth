@@ -1,5 +1,5 @@
-# name:ldap 
-# about: A plugin to provide ldap authentication. 
+# name:ldap
+# about: A plugin to provide ldap authentication.
 # version: 0.3.5
 # authors: Jon Bake <jonmbake@gmail.com>
 
@@ -74,14 +74,19 @@ class LDAPAuthenticator < ::Auth::Authenticator
   end
 end
 
-auth_provider title: 'Login with LDAP',
+auth_provider title: 'with LDAP',
   message: 'Log in with your LDAP credentials',
   frame_width: 920,
   frame_height: 800,
   authenticator: LDAPAuthenticator.new
 
 register_css <<CSS
-  .btn.ldap {
-    background-color: #517693;
+  .btn {
+    &.ldap {
+      background-color: #517693;
+      &:before {
+        content: $fa-var-sitemap;
+      }
+    }
   }
 CSS
