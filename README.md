@@ -34,7 +34,17 @@ When disabling Local Login and other authentication services, clicking the `Logi
 
 ![LDAP Login Popup](https://github.com/jonmbake/screenshots/blob/master/discourse-ldap-auth/ldap_popup.png)
 
+## Submitting a PR
+
+Make sure coding style is maintained and all tests pass by running:
+
+```
+rspec
+```
+
 ## Version History
+
+[0.3.6](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.6)- Fixed bug where user who changed email can no longer be looked up
 
 [0.3.5](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.5)- Updated styling of LDAP login popup
 
