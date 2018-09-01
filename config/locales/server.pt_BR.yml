@@ -2,6 +2,7 @@ pt_BR:
   site_settings:
     ldap_enabled: "O plugin LDAP está ativo?"
     ldap_user_create_mode: "Usuário modo de criação: auto, list or none"
+    ldap_lookup_users_by: "Atributo para encontrar usuários por: email ou username"
     ldap_hostname: "Hostname do servidor LDAP"
     ldap_port: "Porta de conexão do servidor LDAP"
     ldap_method: "Método da conexão:: ssl, tls ou plain"

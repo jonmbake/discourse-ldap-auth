@@ -1,6 +1,6 @@
 # name:ldap
 # about: A plugin to provide ldap authentication.
-# version: 0.3.6
+# version: 0.3.7
 # authors: Jon Bake <jonmbake@gmail.com>
 
 enabled_site_setting :ldap_enabled

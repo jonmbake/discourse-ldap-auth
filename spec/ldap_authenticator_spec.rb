@@ -33,8 +33,8 @@ describe LDAPAuthenticator do
   end
   context 'when SiteSettings.ldap_user_create_mode is auto' do
     it 'will create auth result with ldap entry data and nil user if user with email does not exist' do
-      allow(@user).to receive(:find_by_username).and_return(nil)
-      expect(@user).to receive(:find_by_username).with('tester')
+      allow(@user).to receive(:find_by_email).and_return(nil)
+      expect(@user).to receive(:find_by_email).with('test@test.org')
       result = @auth.after_authenticate(@entry)
       expect(result.email).to eq(@entry.info[:email])
       expect(result.name).to eq(@entry.info[:name])
@@ -49,13 +49,13 @@ describe LDAPAuthenticator do
       SiteSetting.ldap_user_create_mode = 'none'
     end
     it 'will fail auth if user account does not exist' do
-      allow(@user).to receive(:find_by_username).and_return(nil)
+      allow(@user).to receive(:find_by_email).and_return(nil)
       result = @auth.after_authenticate(@entry)
       expect(result.failed?).to eq(true)
       expect(result.failed_reason).to eq('User account does not exist.')
     end
     it 'will pass auth if user account exists' do
-      allow(@user).to receive(:find_by_username).and_return(@user)
+      allow(@user).to receive(:find_by_email).and_return(@user)
       result = @auth.after_authenticate(@entry)
       expect(result.failed?).to eq(false)
     end
@@ -69,14 +69,14 @@ describe LDAPAuthenticator do
       allow(@group).to receive(:find_by).with(name: 'engineering').and_return('engineering_group')
     end
     it 'will fail auth if list does not contain user with email' do
-      allow(@user).to receive(:find_by_username).and_return(nil)
+      allow(@user).to receive(:find_by_email).and_return(nil)
       result = @auth.after_authenticate(@entry)
       expect(result.failed?).to eq(true)
       expect(result.failed_reason).to eq('User with email is not listed in LDAP user list.')
     end
     it 'will pass auth if list contains user with email' do
       #user account exists
-      allow(@user).to receive(:find_by_username).and_return(OpenStruct.new(activate: true, groups: []))
+      allow(@user).to receive(:find_by_email).and_return(OpenStruct.new(activate: true, groups: []))
       entry = OpenStruct.new({
        info: {
           email: 'example_user@gmail.com',
@@ -89,7 +89,7 @@ describe LDAPAuthenticator do
     end
     it 'will create user groups when creating new user account' do
       #user account does not exist
-      allow(@user).to receive(:find_by_username).and_return(nil)
+      allow(@user).to receive(:find_by_email).and_return(nil)
       allow(@user).to receive(:create!).and_return(OpenStruct.new(activate: true, groups: []))
       entry = OpenStruct.new({
        info: {
@@ -106,6 +106,18 @@ describe LDAPAuthenticator do
       expect(result.name).to eq('Example User')
       expect(result.user.groups[0]).to eq('staff_group')
       expect(result.user.groups[1]).to eq('engineering_group')
+    end
+  end
+
+  context 'when SiteSettings.ldap_lookup_users_by is username' do
+    before(:all) do
+      SiteSetting.ldap_user_create_mode = 'auto'
+      SiteSetting.ldap_lookup_users_by = 'username'
+    end
+    it 'will lookup user by username' do
+      expect(@user).to_not receive(:find_by_email)
+      expect(@user).to receive(:find_by_username).with('tester')
+      @auth.after_authenticate(@entry)
     end
   end
 end
