@@ -1,6 +1,6 @@
 # name:ldap
 # about: A plugin to provide ldap authentication.
-# version: 0.3.7
+# version: 0.3.8
 # authors: Jon Bake <jonmbake@gmail.com>
 
 enabled_site_setting :ldap_enabled
@@ -16,6 +16,10 @@ require_relative 'lib/ldap_user'
 class LDAPAuthenticator < ::Auth::Authenticator
   def name
     'ldap'
+  end
+
+  def enabled?
+    true
   end
 
   def after_authenticate(auth_options)

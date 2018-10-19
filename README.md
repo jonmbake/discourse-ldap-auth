@@ -55,6 +55,8 @@ rspec
 
 ## Version History
 
+[0.3.8](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.8)- Fix `enabled?` undefined warning
+
 [0.3.7](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.7)- Add _Attribute to lookup users by_ Setting
 
 [0.3.6](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.6)- Fixed bug where user who changed email can no longer be looked up
