@@ -88,9 +88,6 @@ register_css <<CSS
   .btn {
     &.ldap {
       background-color: #517693;
-      &:before {
-        content: $fa-var-sitemap;
-      }
     }
   }
 CSS
