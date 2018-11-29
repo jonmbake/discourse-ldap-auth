@@ -55,6 +55,8 @@ rspec
 
 ## Version History
 
+[0.4.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.4.0)- Fix Undefined variable: "$fa-var-sitemap" error when upgrading to Discourse version > 2.2.0
+
 [0.3.8](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.8)- Fix `enabled?` undefined warning
 
 [0.3.7](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.7)- Add _Attribute to lookup users by_ Setting
