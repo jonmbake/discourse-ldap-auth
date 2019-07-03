@@ -72,3 +72,7 @@ rspec
 [0.1.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.1.0) - Init
 
 **Note on Updating to Version 0.3** A typo was fixed in the name of a configuration. `ldap_bind_db` was renamed to `ldap_bind_dn`. If you update from <0.2 to 0.3, you will have to reset the `ldap_bind_dn` configuration value. There is a fallback to use the old configuration value, but this will be removed in a future release.
+
+## License
+
+MIT
