@@ -60,6 +60,9 @@ class LDAPAuthenticator < ::Auth::Authenticator
         match[:name] = match[:name] || auth_info[:name]
         return LDAPUser.new(match).auth_result
       when 'auto'
+        unless SiteSetting.ldap_add_to_groups.empty?
+          auth_info[:groups] = SiteSetting.ldap_add_to_groups.present
+        end
         return LDAPUser.new(auth_info).auth_result
       else
         return fail_auth('Invalid option for ldap_user_create_mode setting.')
