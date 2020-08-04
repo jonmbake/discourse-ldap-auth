@@ -1,4 +1,7 @@
 plugins:
+  ldap_login_form_title:
+    default: 'LDAP Account'
+    client: true
   ldap_enabled:
     default: true
   ldap_user_create_mode:
