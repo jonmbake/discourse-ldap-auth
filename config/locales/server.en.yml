@@ -1,5 +1,6 @@
 en:
   site_settings:
+    ldap_login_form_title: "Title of the LDAP login form"
     ldap_enabled: "Is LDAP plugin enabled?"
     ldap_user_create_mode: "User create mode: auto, list or none"
     ldap_lookup_users_by: "Attribute to lookup users by: email or username"
