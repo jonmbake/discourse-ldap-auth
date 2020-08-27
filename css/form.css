@@ -35,6 +35,7 @@ input {
     margin-bottom: 20px;
     font-size: 0.929em;
     line-height: 18px;
+    width: 230px;
 }
 
 #username {
@@ -49,9 +50,13 @@ button {
     font-weight: normal;
     padding: 6px 18px;
     font-size: 14px;
-    line-height: 0px;
+    line-height: 16px;
     display: block;
     margin-left: auto;
+}
+
+label{
+display:inline-block;
 }
 
 label:before {
