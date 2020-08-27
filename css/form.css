@@ -1,7 +1,7 @@
 body {
     color: #222222;
     background-color: white;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: inherit;
     font-size: 14px;
     line-height: 19px;
 }
@@ -15,7 +15,7 @@ h1 {
 form {
     padding: 20px;
     margin: 0px auto;
-    width: 710px;
+    width: 280px;
     border: 1px solid #e9e9e9;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
 }
