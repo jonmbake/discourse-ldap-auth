@@ -25,11 +25,11 @@ form {
 }
 
 form:before {
-       content: '';
+    content: '';
     display: block;
     height: 50px;
     width: 170px;
-    background-image: url(https://d2b8lqy494c4mo.cloudfront.net/mss/images/miracle-logo-01.svg);
+    background-image: url('https://d2b8lqy494c4mo.cloudfront.net/mss/images/miracle-logo-01.svg');
     margin: 0 auto;
     margin-bottom: 30px;
     background-repeat: no-repeat;
