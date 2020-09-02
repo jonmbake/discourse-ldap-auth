@@ -14,7 +14,7 @@ h1 {
 form {
     padding: 30px 20px;
     margin: 0px auto;
-    width: 335px;
+    width: 330px;
     border: 1px solid #fff;
     background: #fff;
     box-shadow: none;
@@ -65,7 +65,7 @@ button {
     line-height: 16px;
     display: block;
     margin-left: auto;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 label{
