@@ -30,3 +30,58 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
+
+  integration_test:
+    runs-on: ubuntu-latest
+    container: discourse/discourse_test:release
+    timeout-minutes: 60
+
+    env:
+      DISCOURSE_HOSTNAME: www.example.com
+      RUBY_GLOBAL_METHOD_CACHE_SIZE: 131072
+      RAILS_ENV: test
+      PGHOST: postgres
+      PGUSER: discourse
+      PGPASSWORD: discourse
+
+    strategy:
+      fail-fast: false
+
+    services:
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: discourse
+          POSTGRES_PASSWORD: discourse
+          POSTGRES_DB: discourse_test
+        options: >-
+          --mount type=tmpfs,destination=/var/lib/postgresql/data
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Start redis
+        run: |
+          redis-server /etc/redis/redis.conf &
+
+      - name: Install discourse-ldap-plugin
+        run: |
+          mkdir /var/www/discourse/plugins/discourse-ldap-auth
+          cp -r ${{ github.workspace }}/* -r /var/www/discourse/plugins/discourse-ldap-auth
+
+      - name: Start Discourse
+        run: |
+          cd /var/www/discourse
+          bundle install
+          bundle exec rake db:create
+          bundle exec rake db:migrate
+          bundle exec rails server &
