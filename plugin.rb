@@ -79,9 +79,6 @@ class LDAPAuthenticator < ::Auth::Authenticator
 end
 
 auth_provider title: 'with LDAP',
-  message: 'Log in with your LDAP credentials',
-  frame_width: 920,
-  frame_height: 800,
   authenticator: LDAPAuthenticator.new
 
 register_css <<CSS
