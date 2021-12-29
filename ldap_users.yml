@@ -1,4 +1,4 @@
 - :name: Example User
   :email: example_user@gmail.com
   :username: example_user
-  :groups: ['staff', 'engineering']
+  :groups: ['team', 'engineering']
