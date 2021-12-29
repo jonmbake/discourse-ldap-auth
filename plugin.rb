@@ -13,7 +13,7 @@ gem 'omniauth-ldap', '1.0.5'
 require 'yaml'
 require_relative 'lib/ldap_user'
 
-class LDAPAuthenticator < ::Auth::Authenticator
+class ::LDAPAuthenticator < ::Auth::Authenticator
   def name
     'ldap'
   end
