@@ -1,4 +1,4 @@
-name: CI
+name: CodeQL
 
 on:
   pull_request:
@@ -22,11 +22,6 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7
-
-    - name: Run rspec tests
-      run: |
-        gem install rspec
-        rspec
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
