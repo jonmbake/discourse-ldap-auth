@@ -95,4 +95,24 @@ describe LDAPAuthenticator do
       expect(result.user).to eq(user)
     end
   end
+
+  describe "overrides_username behaviour" do
+    it "overrides username during initial signup" do
+      result = authenticator.after_authenticate(auth_hash)
+      expect(result.username).to eq(auth_hash.info[:nickname])
+      expect(result.failed?).to eq(false)
+      expect(result.user).to be_nil
+      expect(result.overrides_username).to eq(true)
+    end
+
+    it "does not override username on future logins" do
+      SiteSetting.ldap_lookup_users_by = 'username'
+      user = Fabricate(:user, username: "tester")
+      result = authenticator.after_authenticate(auth_hash)
+      expect(result.username).to eq(auth_hash.info[:nickname])
+      expect(result.failed?).to eq(false)
+      expect(result.user).to eq(user)
+      expect(result.overrides_username).to eq(nil)
+    end
+  end
 end
