@@ -16,7 +16,7 @@ class LDAPUser
     result.email = @email
     result.user = @user
     if result.respond_to? :overrides_username
-      result.overrides_username = true
+      result.overrides_username = true if !account_exists?
     else
       # TODO: Remove once Discourse 2.8 stable is released
       result.omit_username = true
