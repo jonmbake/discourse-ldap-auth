@@ -78,8 +78,7 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
   end
 end
 
-auth_provider title: 'with LDAP',
-  authenticator: LDAPAuthenticator.new
+auth_provider authenticator: LDAPAuthenticator.new
 
 register_css <<CSS
   .btn {

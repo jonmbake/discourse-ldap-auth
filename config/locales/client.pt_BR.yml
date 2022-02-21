@@ -1,0 +1,6 @@
+pt_BR:
+  js:
+    login:
+      ldap:
+        name: "LDAP"
+        title: "com a LDAP"

@@ -1,0 +1,8 @@
+en:
+  js:
+    login:
+      ldap:
+        name: "LDAP"
+        title: "with LDAP"
+        sr_title: "Login with LDAP"
+        message: "Authenticating with LDAP"

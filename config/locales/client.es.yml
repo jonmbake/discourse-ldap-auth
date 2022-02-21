@@ -1,0 +1,6 @@
+es:
+  js:
+    login:
+      ldap:
+        name: "LDAP"
+        title: "con LDAP"
