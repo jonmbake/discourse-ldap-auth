@@ -58,6 +58,8 @@ rspec
 
 ## Version History
 
+[0.6.1](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.6.1)- Bump net-ldap dependency version in order to support Ruby 3
+
 [0.6.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.6.0)- Update omit_username to override_username following Discourse core changes
 
 [0.5.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.5.0)- Remove call to deprecated Discourse code from [FEATURE: Use full page redirection for all external auth methods](https://github.com/discourse/discourse/pull/8092)
