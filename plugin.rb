@@ -73,7 +73,7 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
   end
   def load_user_descriptions
     file_path = "#{File.expand_path(File.dirname(__FILE__))}/ldap_users.yml"
-    return nil unless File.exists?(file_path)
+    return nil unless File.exist?(file_path)
     return YAML.load_file(file_path)
   end
 end
