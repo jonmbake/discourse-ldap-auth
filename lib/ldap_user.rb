@@ -29,12 +29,17 @@ class LDAPUser
     return !@user.nil?
   end
 
+  def ensure_account_exists
+    return self if account_exists?
+    @user = User.create!(name: self.name, email: self.email, username: self.username)
+    @user.activate
+    self
+  end
+
   private
   def create_user_groups(user_groups)
     return if user_groups.nil?
-    #user account must exist in order to create user groups
-    @user = User.create!(name: self.name, email: self.email, username: self.username)
-    @user.activate
+    self.ensure_account_exists
     user_groups.each do |group_name|
       group = Group.find_by(name: group_name)
       @user.groups << group unless group.nil?

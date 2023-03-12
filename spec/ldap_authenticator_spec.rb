@@ -13,13 +13,13 @@ describe LDAPAuthenticator do
   )}
 
   context 'when SiteSettings.ldap_user_create_mode is auto' do
-    it 'will create auth result with ldap entry data and nil user if user with email does not exist' do
+    it 'will create auth result with ldap entry data and create user if user with email does not exist' do
       result = authenticator.after_authenticate(auth_hash)
       expect(result.email).to eq(auth_hash.info[:email])
       expect(result.name).to eq(auth_hash.info[:name])
       expect(result.username).to eq(auth_hash.info[:nickname])
       expect(result.failed?).to eq(false)
-      expect(result.user).to be_nil
+      expect(result.user).not_to be_nil
     end
   end
 
@@ -101,7 +101,7 @@ describe LDAPAuthenticator do
       result = authenticator.after_authenticate(auth_hash)
       expect(result.username).to eq(auth_hash.info[:nickname])
       expect(result.failed?).to eq(false)
-      expect(result.user).to be_nil
+      expect(result.user).not_to be_nil
       expect(result.overrides_username).to eq(true)
     end
 
