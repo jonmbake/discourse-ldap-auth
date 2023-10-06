@@ -19,7 +19,7 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
   end
 
   def enabled?
-    true
+    SiteSetting.ldap_enabled
   end
 
   def after_authenticate(auth_options)
