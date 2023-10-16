@@ -5,6 +5,8 @@ plugins:
     default: 'auto'
   ldap_lookup_users_by:
     default: 'email'
+  ldap_add_to_groups:
+    default: ''
   ldap_hostname:
     default: 'adfs.example.com'
   ldap_port:
