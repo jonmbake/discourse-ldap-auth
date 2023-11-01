@@ -7,19 +7,29 @@ body {
 }
 
 h1 {
+    display: none;
     font-size: 1.429em;
     padding: 10px 15px 7px;
     border-bottom: 1px solid #e9e9e9;
 }
-
 form {
-    padding: 20px;
     margin: 0px auto;
-    width: 710px;
+    width: 400px;
+    padding: 10px;
     border: 1px solid #e9e9e9;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    margin-top: 50px;
 }
-
+form:before {
+    content: 'LDAP Authentication';
+    text-align: center;
+    display: inline-block;
+    font-weight: bolder;
+    font-size: 24px;
+    padding: 25px 0px;
+    width: 400px;
+}
 input {
     background-color: white;
     border: 1px solid #e9e9e9;
@@ -32,22 +42,26 @@ input {
     font-size: 0.929em;
     line-height: 18px;
 }
-
-#username {
-    margin-left: 27px
-}
-
 button {
     border: none;
     font-weight: normal;
     color: white;
     background: #0088cc;
-    padding: 9px 18px;
-    font-size: 1.143em;
+    padding: 19px 28px;
+    font-size: 20px;
     line-height: 15px;
     display: block;
+    margin: 30px auto;
 }
-
+label {
+    display: block;
+}
 label:before {
     content: ' '; display: block;
+}
+input {
+    height: 68px;
+    padding: 0 25px;
+    width: 348px;
+    font-size: 24px;
 }
