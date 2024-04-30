@@ -7,8 +7,8 @@ enabled_site_setting :ldap_enabled
 
 gem 'pyu-ruby-sasl', '0.0.3.3', require: false
 gem 'rubyntlm', '0.3.4', require: false
-gem 'net-ldap', '0.17.1'
-gem 'omniauth-ldap', '1.0.5'
+gem 'net-ldap', '0.19.0'
+gem 'omniauth-ldap', '2.0.0'
 
 require 'yaml'
 require_relative 'lib/ldap_user'
@@ -23,6 +23,9 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
   end
 
   def after_authenticate(auth_options)
+    puts "COUCOU"
+    puts auth_options.info
+    puts auth_options.extra
     return auth_result(auth_options.info)
   end
 
@@ -36,11 +39,13 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
           method: SiteSetting.ldap_method,
           base: SiteSetting.ldap_base,
           uid: SiteSetting.ldap_uid,
-          email: SiteSetting.ldap_email,
           # In 0.3.0, we fixed a typo in the ldap_bind_dn config name. This fallback will be removed in a future version.
           bind_dn: SiteSetting.ldap_bind_dn.presence || SiteSetting.try(:ldap_bind_db),
           password: SiteSetting.ldap_password,
           filter: SiteSetting.ldap_filter
+        )
+        env["omniauth.strategy"].config.merge!(
+          email: SiteSetting.ldap_email
         )
       }
   end
