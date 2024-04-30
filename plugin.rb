@@ -44,9 +44,6 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
           password: SiteSetting.ldap_password,
           filter: SiteSetting.ldap_filter
         )
-        env["omniauth.strategy"].config.merge!(
-          email: SiteSetting.ldap_email
-        )
       }
   end
 
