@@ -16,7 +16,7 @@ plugins:
   ldap_uid:
     default: 'sAMAccountName'
   ldap_email:
-    default: 'mail'
+    default: 'email'
   ldap_bind_dn:
     default: ''
   ldap_password:

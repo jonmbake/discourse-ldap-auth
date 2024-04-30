@@ -23,9 +23,9 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
   end
 
   def after_authenticate(auth_options)
-    puts "COUCOU"
-    puts auth_options.info
-    puts auth_options.extra
+    if SiteSetting.ldap_email != 'email'
+      auth_options.info[:email] = auth_options.extra[:raw_info][SiteSetting.ldap_email].first()
+    end
     return auth_result(auth_options.info)
   end
 
