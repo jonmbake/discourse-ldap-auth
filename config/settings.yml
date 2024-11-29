@@ -1,4 +1,6 @@
 plugins:
+  title:
+    default: 'LDAP Authentication'
   ldap_enabled:
     default: true
   ldap_user_create_mode:
