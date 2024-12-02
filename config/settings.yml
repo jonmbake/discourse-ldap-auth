@@ -1,4 +1,6 @@
 plugins:
+  ldap_title:
+    default: 'LDAP Authentication'
   ldap_enabled:
     default: true
   ldap_user_create_mode:
@@ -15,6 +17,8 @@ plugins:
     default: 'dc=example,dc=com'
   ldap_uid:
     default: 'sAMAccountName'
+  ldap_email:
+    default: 'email'
   ldap_bind_dn:
     default: ''
   ldap_password:

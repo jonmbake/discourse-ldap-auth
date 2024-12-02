@@ -7,7 +7,7 @@ enabled_site_setting :ldap_enabled
 
 gem 'pyu-ruby-sasl', '0.0.3.3', require: false
 gem 'rubyntlm', '0.3.4', require: false
-gem 'net-ldap', '0.17.1'
+gem 'net-ldap', '0.19.0'
 gem 'omniauth-ldap', '1.0.5'
 
 require 'yaml'
@@ -23,6 +23,9 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
   end
 
   def after_authenticate(auth_options)
+    if SiteSetting.ldap_email != 'email'
+      auth_options.info[:email] = auth_options.extra[:raw_info][SiteSetting.ldap_email].first()
+    end
     return auth_result(auth_options.info)
   end
 
@@ -31,6 +34,7 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
     omniauth.provider :ldap,
       setup:  -> (env) {
         env["omniauth.strategy"].options.merge!(
+          title: SiteSetting.ldap_title,
           host: SiteSetting.ldap_hostname,
           port: SiteSetting.ldap_port,
           method: SiteSetting.ldap_method,
