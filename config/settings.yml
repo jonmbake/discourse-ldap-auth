@@ -1,5 +1,5 @@
 plugins:
-  title:
+  ldap_title:
     default: 'LDAP Authentication'
   ldap_enabled:
     default: true
