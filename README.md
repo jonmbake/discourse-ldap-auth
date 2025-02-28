@@ -58,6 +58,8 @@ rspec
 
 ## Version History
 
+[0.7.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.7.0)- Temporarily pulled in omniauth-ldap due to omniauth version conflict with Discourse; bumped net-ldap version
+
 [0.6.1](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.6.1)- Bump net-ldap dependency version in order to support Ruby 3
 
 [0.6.0](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.6.0)- Update omit_username to override_username following Discourse core changes
