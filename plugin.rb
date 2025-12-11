@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 # name:ldap
 # about: A plugin to provide ldap authentication.
-# version: 0.7.0
+# version: 0.8.0
 # authors: Jon Bake <jonmbake@gmail.com>
 
 enabled_site_setting :ldap_enabled

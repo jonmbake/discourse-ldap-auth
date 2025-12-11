@@ -1,6 +1,6 @@
 {
   "name": "discourse-ldap-auth",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "repository": "https://github.com/jonmbake/discourse-ldap-auth",
   "author": "Jon Bake",
   "license": "MIT",
