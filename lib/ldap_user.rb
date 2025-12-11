@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class LDAPUser
   attr_reader :name, :email, :username, :user
 
@@ -22,11 +23,11 @@ class LDAPUser
       result.omit_username = true
     end
     result.email_valid = true
-    return result
+    result
   end
 
   def account_exists?
-    return !@user.nil?
+    !@user.nil?
   end
 
   private

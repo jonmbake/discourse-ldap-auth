@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # name:ldap
 # about: A plugin to provide ldap authentication.
 # version: 0.7.0
@@ -14,7 +15,7 @@ require_relative 'lib/omniauth-ldap/adaptor'
 require_relative 'lib/omniauth/strategies/ldap'
 require_relative 'lib/ldap_user'
 
-class ::LDAPAuthenticator < ::Auth::Authenticator
+class LDAPAuthenticator < ::Auth::Authenticator
   def name
     'ldap'
   end
@@ -24,7 +25,7 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
   end
 
   def after_authenticate(auth_options)
-    return auth_result(auth_options.info)
+    auth_result(auth_options.info)
   end
 
   def register_middleware(omniauth)
@@ -50,7 +51,7 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
     case SiteSetting.ldap_user_create_mode
       when 'none'
         ldap_user = LDAPUser.new(auth_info)
-        return ldap_user.account_exists? ? ldap_user.auth_result : fail_auth('User account does not exist.')
+        ldap_user.account_exists? ? ldap_user.auth_result : fail_auth('User account does not exist.')
       when 'list'
         user_descriptions = load_user_descriptions
         return fail_auth('List of users must be provided when ldap_user_create_mode setting is set to \'list\'.') if user_descriptions.nil?
@@ -59,11 +60,11 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
         return fail_auth('User with email is not listed in LDAP user list.') if match.nil?
         match[:nickname] = match[:username] || auth_info[:nickname]
         match[:name] = match[:name] || auth_info[:name]
-        return LDAPUser.new(match).auth_result
+        LDAPUser.new(match).auth_result
       when 'auto'
-        return LDAPUser.new(auth_info).auth_result
+        LDAPUser.new(auth_info).auth_result
       else
-        return fail_auth('Invalid option for ldap_user_create_mode setting.')
+        fail_auth('Invalid option for ldap_user_create_mode setting.')
     end
   end
   def fail_auth(reason)
@@ -75,7 +76,7 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
   def load_user_descriptions
     file_path = "#{File.expand_path(File.dirname(__FILE__))}/ldap_users.yml"
     return nil unless File.exist?(file_path)
-    return YAML.load_file(file_path)
+    YAML.load_file(file_path)
   end
 end
 
