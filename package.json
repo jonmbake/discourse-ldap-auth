@@ -1,0 +1,13 @@
+{
+  "name": "discourse-ldap-auth",
+  "version": "0.7.0",
+  "repository": "https://github.com/jonmbake/discourse-ldap-auth",
+  "author": "Jon Bake",
+  "license": "MIT",
+  "devDependencies": {
+    "@discourse/lint-configs": "^1.0.0",
+    "ember-template-lint": "^5.11.2",
+    "eslint": "^8.52.0",
+    "prettier": "^2.8.8"
+  }
+}

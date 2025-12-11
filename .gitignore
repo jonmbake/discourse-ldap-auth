@@ -2,3 +2,4 @@ auto_generated
 gems
 *.iml
 .idea
+node_modules
