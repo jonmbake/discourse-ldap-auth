@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # taken from https://github.com/omniauth/omniauth-ldap/blob/master/lib/omniauth-ldap/adaptor.rb
 #this code borrowed pieces from activeldap and net-ldap
 require 'rack'
@@ -19,9 +20,9 @@ module OmniAuth
       MUST_HAVE_KEYS = [:host, :port, :method, [:uid, :filter], :base]
 
       METHOD = {
-        :ssl => :simple_tls,
-        :tls => :start_tls,
-        :plain => nil,
+        ssl: :simple_tls,
+        tls: :start_tls,
+        plain: nil,
       }
 
       attr_accessor :bind_dn, :password
@@ -47,17 +48,17 @@ module OmniAuth
         end
         method = ensure_method(@method)
         config = {
-          :host => @host,
-          :port => @port,
-          :base => @base
+          host: @host,
+          port: @port,
+          base: @base
         }
         @bind_method = @try_sasl ? :sasl : (@allow_anonymous||!@bind_dn||!@password ? :anonymous : :simple)
 
 
-        @auth = sasl_auths({:username => @bind_dn, :password => @password}).first if @bind_method == :sasl
-        @auth ||= { :method => @bind_method,
-                    :username => @bind_dn,
-                    :password => @password
+        @auth = sasl_auths({username: @bind_dn, password: @password}).first if @bind_method == :sasl
+        @auth ||= { method: @bind_method,
+                    username: @bind_dn,
+                    password: @password
                   }
         config[:auth] = @auth
         config[:encryption] = method
@@ -71,15 +72,15 @@ module OmniAuth
         result = false
         @connection.open do |me|
           rs = me.search args
-          if rs and rs.first and dn = rs.first.dn
+          if rs && rs.first && (dn = rs.first.dn)
             password = args[:password]
             method = args[:method] || @method
             password = password.call if password.respond_to?(:call)
             if method == 'sasl'
-            result = rs.first if me.bind(sasl_auths({:username => dn, :password => password}).first)
+            result = rs.first if me.bind(sasl_auths({username: dn, password: password}).first)
             else
-            result = rs.first if me.bind(:method => :simple, :username => dn,
-                                :password => password)
+            result = rs.first if me.bind(method: :simple, username: dn,
+                                password: password)
             end
           end
         end
@@ -106,10 +107,10 @@ module OmniAuth
           next unless respond_to?(sasl_bind_setup, true)
           initial_credential, challenge_response = send(sasl_bind_setup, options)
           auths << {
-            :method => :sasl,
-            :initial_credential => initial_credential,
-            :mechanism => mechanism,
-            :challenge_response => challenge_response
+            method: :sasl,
+            initial_credential: initial_credential,
+            mechanism: mechanism,
+            challenge_response: challenge_response
           }
         end
         auths
@@ -119,7 +120,7 @@ module OmniAuth
         bind_dn = options[:username]
         initial_credential = ""
         challenge_response = Proc.new do |cred|
-          pref = SASL::Preferences.new :digest_uri => "ldap/#{@host}", :username => bind_dn, :has_password? => true, :password => options[:password]
+          pref = SASL::Preferences.new digest_uri: "ldap/#{@host}", username: bind_dn, has_password?: true, password: options[:password]
           sasl = SASL.new("DIGEST-MD5", pref)
           response = sasl.receive("challenge", cred)
           response[1]
@@ -136,7 +137,7 @@ module OmniAuth
           t2_msg = Net::NTLM::Message.parse( challenge )
           bind_dn, domain = bind_dn.split('\\').reverse
           t2_msg.target_name = Net::NTLM::encode_utf16le(domain) if domain
-          t3_msg = t2_msg.response( {:user => bind_dn, :password => psw}, {:ntlmv2 => true} )
+          t3_msg = t2_msg.response( {user: bind_dn, password: psw}, {ntlmv2: true} )
           t3_msg.serialize
         }
         [Net::NTLM::Message::Type1.new.serialize, nego]
