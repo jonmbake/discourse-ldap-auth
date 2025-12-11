@@ -1,5 +1,5 @@
-[![CI](https://github.com/jonmbake/discourse-ldap-auth/workflows/CI/badge.svg)](https://github.com/jonmbake/discourse-ldap-auth/actions?query=workflow%3ACI)
-[![CodeQL Scan](codeql-scan.svg)](https://github.com/jonmbake/discourse-ldap-auth/security/code-scanning?query=tool%3ACodeQL)
+[![CI](https://github.com/jonmbake/discourse-ldap-auth/actions/workflows/plugin-tests.yml/badge.svg)](https://github.com/jonmbake/discourse-ldap-auth/actions/workflows/plugin-tests.yml)
+[![CodeQL](https://github.com/jonmbake/discourse-ldap-auth/actions/workflows/codeql.yml/badge.svg)](https://github.com/jonmbake/discourse-ldap-auth/actions/workflows/codeql.yml)
 
 # discourse-ldap-auth
 

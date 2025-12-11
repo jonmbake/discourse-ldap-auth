@@ -1,0 +1,101 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 0.7.1)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Get version
+        id: get_version
+        run: |
+          VERSION="${{ inputs.version }}"
+          # Remove 'v' prefix if present
+          VERSION_NUMBER="${VERSION#v}"
+          echo "version=v${VERSION_NUMBER}" >> $GITHUB_OUTPUT
+          echo "version_number=${VERSION_NUMBER}" >> $GITHUB_OUTPUT
+      
+      - name: Update plugin.rb version
+        run: |
+          sed -i.bak "s/^# version: .*$/# version: ${{ steps.get_version.outputs.version_number }}/" plugin.rb
+          rm plugin.rb.bak
+      
+      - name: Update package.json version
+        run: |
+          sed -i.bak "s/\"version\": \".*\"/\"version\": \"${{ steps.get_version.outputs.version_number }}\"/" package.json
+          rm package.json.bak
+      
+      - name: Commit version updates
+        run: |
+          git add plugin.rb package.json
+          git commit -m "Bump version to ${{ steps.get_version.outputs.version_number }}"
+          git push origin ${{ github.ref_name }}
+      
+      - name: Create and push tag
+        run: |
+          git tag ${{ steps.get_version.outputs.version }}
+          git push origin ${{ steps.get_version.outputs.version }}
+      
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get the previous tag
+          PREV_TAG=$(git describe --tags --abbrev=0 ${{ steps.get_version.outputs.version }}^ 2>/dev/null || echo "")
+          
+          if [ -z "$PREV_TAG" ]; then
+            echo "No previous tag found, generating changelog from initial commit"
+            CHANGELOG=$(git log ${{ steps.get_version.outputs.version }} --pretty=format:"- %s (%h)" --reverse)
+          else
+            echo "Generating changelog from ${PREV_TAG} to ${{ steps.get_version.outputs.version }}"
+            CHANGELOG=$(git log ${PREV_TAG}..${{ steps.get_version.outputs.version }} --pretty=format:"- %s (%h)")
+          fi
+          
+          # Write changelog to file for multiline handling
+          echo "$CHANGELOG" > /tmp/changelog.txt
+          
+          # Set output using multiline format
+          {
+            echo "notes<<EOF"
+            cat /tmp/changelog.txt
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+      
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.version }}
+          release_name: Release ${{ steps.get_version.outputs.version }}
+          body: |
+            ## Changes in ${{ steps.get_version.outputs.version }}
+            
+            ${{ steps.changelog.outputs.notes }}
+            
+            ## Installation
+            
+            Follow the [plugin installation guide](https://meta.discourse.org/t/install-a-plugin/19157) using this repository.
+          draft: false
+          prerelease: false
