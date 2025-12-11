@@ -15,7 +15,8 @@ require_relative 'lib/omniauth-ldap/adaptor'
 require_relative 'lib/omniauth/strategies/ldap'
 require_relative 'lib/ldap_user'
 
-class LDAPAuthenticator < ::Auth::Authenticator
+# rubocop:disable Discourse/Plugins/NoMonkeyPatching
+class ::LDAPAuthenticator < ::Auth::Authenticator
   def name
     'ldap'
   end
@@ -79,6 +80,7 @@ class LDAPAuthenticator < ::Auth::Authenticator
     YAML.load_file(file_path)
   end
 end
+# rubocop:enable Discourse/Plugins/NoMonkeyPatching
 
 auth_provider authenticator: LDAPAuthenticator.new
 
