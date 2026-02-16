@@ -5,7 +5,6 @@ require 'rack'
 require 'net/ldap'
 require 'net/ntlm'
 require 'sasl'
-require 'kconv'
 module OmniAuth
   module LDAP
     class Adaptor
