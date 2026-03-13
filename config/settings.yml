@@ -11,6 +11,8 @@ plugins:
     default: 389
   ldap_method:
     default: 'plain'
+  ldap_verify_cert:
+    default: true
   ldap_base:
     default: 'dc=example,dc=com'
   ldap_uid:

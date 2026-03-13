@@ -37,6 +37,7 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
           host: SiteSetting.ldap_hostname,
           port: SiteSetting.ldap_port,
           method: SiteSetting.ldap_method,
+          verify_cert: SiteSetting.ldap_verify_cert,
           base: SiteSetting.ldap_base,
           uid: SiteSetting.ldap_uid,
           # In 0.3.0, we fixed a typo in the ldap_bind_dn config name. This fallback will be removed in a future version.
