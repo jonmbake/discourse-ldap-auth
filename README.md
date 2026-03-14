@@ -17,6 +17,18 @@ After the plugin is installed, logging in as an Admin and navigating to `admin/s
 
 ![Settings Page](https://github.com/jonmbake/screenshots/blob/master/discourse-ldap-auth/settings.png)
 
+## A Note on TLS Certificate Verification
+
+When using `ssl` or `tls` as the connection method, the LDAP client will verify the server's TLS certificate by default. If your LDAP server uses a self-signed certificate, verification will fail and connections will be rejected.
+
+To allow self-signed certificates, set `ldap_verify_cert` to `false` in the plugin settings:
+
+  Name | Default | Description
+-------|---------|-------------
+ldap_verify_cert | true | Whether to verify the LDAP server's TLS certificate when using `ssl` or `tls` connection method. Set to `false` to allow self-signed certificates.
+
+> **Security Note:** Disabling certificate verification (`ldap_verify_cert: false`) removes protection against man-in-the-middle attacks. Only disable this in trusted network environments.
+
 ## A Note on User Account Creation
 
 By default, user accounts are automatically created (if they don't already exist) after authentication using *name*, *nickname* and *email* attributes of the LDAP entry.  If you do not want this behavior, you can change the *ldap_user_create_mode* configuration value to one of the following:
