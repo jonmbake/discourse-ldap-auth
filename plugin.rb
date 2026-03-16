@@ -26,6 +26,9 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
   end
 
   def after_authenticate(auth_options)
+    if SiteSetting.ldap_email != 'email'
+      auth_options.info[:email] = auth_options.extra[:raw_info][SiteSetting.ldap_email].first()
+    end
     auth_result(auth_options.info)
   end
 
@@ -34,6 +37,7 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
     omniauth.provider :ldap,
       setup:  -> (env) {
         env["omniauth.strategy"].options.merge!(
+          title: SiteSetting.ldap_title,
           host: SiteSetting.ldap_hostname,
           port: SiteSetting.ldap_port,
           method: SiteSetting.ldap_method,
