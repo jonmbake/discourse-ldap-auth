@@ -11,3 +11,4 @@ en:
     ldap_bind_dn: "LDAP bind dn (needed if LDAP server does not allow anonymous binding)"
     ldap_password:  "LDAP bind password (needed if LDAP server does not allow anonymous binding)"
     ldap_filter:  "LDAP filter (for group based authentication)"
+    ldap_email:  "Mail attribute to bind in priority to discourse primary mail"

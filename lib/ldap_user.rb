@@ -7,6 +7,14 @@ class LDAPUser
     @email = auth_info[:email]
     @username = auth_info[:nickname]
     @user = SiteSetting.ldap_lookup_users_by == 'username' ? User.find_by_username(@username) : User.find_by_email(@email)
+    primary_email = @user.user_emails.find_by(email: @user.email)
+    if primary_email.present?
+      primary_email.update!(email: @email)
+    else
+      @user.user_emails.update_all(primary: false)
+      @user.user_emails.create!(email: @email, primary: true)
+    end
+    @user.reload
     create_user_groups(auth_info[:groups]) unless self.account_exists?
   end
 

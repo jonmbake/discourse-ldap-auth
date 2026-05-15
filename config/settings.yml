@@ -24,3 +24,5 @@ plugins:
     secret: true
   ldap_filter:
     default: ''
+  ldap_email:
+    default: 'email'
