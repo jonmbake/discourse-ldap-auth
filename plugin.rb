@@ -26,6 +26,16 @@ class ::LDAPAuthenticator < ::Auth::Authenticator
   end
 
   def after_authenticate(auth_options)
+    if SiteSetting.ldap_email != 'email'
+      if not auth_options.extra[:raw_info][SiteSetting.ldap_email].blank?
+        emails = Array(auth_options.extra[:raw_info][SiteSetting.ldap_email])
+          .select { |email| email.match?(/\A[^@\s]+@[^@\s]+\z/) }
+        if not emails.empty?
+          auth_options.info[:email] = emails.first()
+        end
+      end
+    end
+
     auth_result(auth_options.info)
   end
 
